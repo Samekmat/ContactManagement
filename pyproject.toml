@@ -29,6 +29,10 @@ lint.ignore = [
     "TRY003",  # Avoid long messages in raise
     "EM101",  # Exception string literal
 ]
+exclude = [
+    "**/migrations/*.py",
+    "**/migrations",
+]
 
 [build-system]
 requires = ["uv"]
