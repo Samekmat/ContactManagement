@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Create/Edit Contact{% endblock %}
+{% block title %}{% if object %}Edit{% else %}Create{% endif %} Contact{% endblock %}
 
 {% block content %}
 <div class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
@@ -8,12 +9,12 @@
     {% if object %}Edit{% else %}Create{% endif %} Contact
   </h1>
 
-  <form method="post" class="space-y-5">
+  <form id="contact-form" method="post" class="space-y-5" novalidate>
     {% csrf_token %}
 
     {% for field in form %}
-      <div>
-        <label class="block mb-1 text-sm font-medium text-gray-700">{{ field.label_tag }}</label>
+      <div class="mb-4">
+        <label for="{{ field.id_for_label }}" class="block mb-1 text-sm font-medium text-gray-700">{{ field.label }}</label>
         {{ field }}
         {% if field.errors %}
           <p class="text-sm text-red-600 mt-1">{{ field.errors }}</p>
@@ -27,4 +28,5 @@
     </button>
   </form>
 </div>
+<script src="{% static 'contacts/js/contact_form_validation.js' %}"></script>
 {% endblock %}
