@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Detail{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-xl mt-10">
+  <h1 class="text-3xl font-bold mb-4">Contact: {{ contact.first_name }} {{ contact.last_name }}</h1>
+
+  <div class="mb-4">
+    <strong>Email:</strong> <span class="text-gray-700">{{ contact.email }}</span>
+  </div>
+  <div class="mb-4">
+    <strong>Phone:</strong> <span class="text-gray-700">{{ contact.phone_number }}</span>
+  </div>
+  <div class="mb-4">
+    <strong>City:</strong> <span class="text-gray-700">{{ contact.city }}</span>
+  </div>
+  <div class="mb-4">
+    <strong>Status:</strong> <span class="text-gray-700">{{ contact.status }}</span>
+  </div>
+  <div class="mb-4">
+    <strong>Creation date:</strong> <span class="text-gray-700">{{ contact.created_at }}</span>
+  </div>
+
+  <div class="mt-6">
+    <a href="{% url 'contacts:contact-list' %}" class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+      Back to Contact List
+    </a>
+  </div>
+</div>
+{% endblock %}

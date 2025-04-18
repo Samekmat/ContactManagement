@@ -1,11 +1,9 @@
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.forms import Form
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 
 from .forms import RegistrationForm
@@ -21,8 +19,4 @@ class RegisterView(CreateView):
         """Handle the form submission and log the user in after registration."""
         response = super().form_valid(form)
         login(self.request, self.object)
-        return redirect("index", response=response)
-
-
-class IndexView(LoginRequiredMixin, TemplateView):
-    template_name = "index.html"
+        return redirect("contact-list", response=response)
