@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -8,11 +9,11 @@ from django.views.generic import (
 )
 
 from contacts.forms import ContactForm
-from contacts.models import Contact
+from contacts.models import Contact, ContactStatusChoices
 
 
 class ContactListView(ListView):
-    """Displays a paginated list of Contact objects with optional sorting."""
+    """Displays a paginated list of Contact objects with optional filtering, sorting and searching."""
 
     model = Contact
     template_name = "contacts/contact_list.html"
@@ -31,6 +32,30 @@ class ContactListView(ListView):
             ordering = "last_name"
         return ordering
 
+    def get_queryset(self: "ContactListView"):
+        """
+        Return a filtered queryset based on the search query and ordering.
+
+        :return:
+            QuerySet: Filtered and ordered queryset.
+        """
+        queryset = super().get_queryset()
+        query = self.request.GET.get("q")
+        status = self.request.GET.get("status")
+
+        if query:
+            queryset = queryset.filter(
+                Q(first_name__icontains=query)
+                | Q(last_name__icontains=query)
+                | Q(email__icontains=query)
+                | Q(phone_number__icontains=query),
+            )
+
+        if status and status.isdigit():
+            queryset = queryset.filter(status_id=int(status))
+
+        return queryset.order_by(self.get_ordering())
+
     def get_context_data(self: "ContactListView", **kwargs: dict) -> dict:
         """
         Add additional context data to the template.
@@ -38,10 +63,13 @@ class ContactListView(ListView):
         :param kwargs: Keyword arguments passed to the context.
 
         :return:
-            dict: The context dictionary with the current sort order appended.
+            dict: The context dictionary with the current sort order and search query.
         """
         context = super().get_context_data(**kwargs)
         context["current_sort"] = self.request.GET.get("sort", "last_name")
+        context["query"] = self.request.GET.get("q", "")
+        context["current_status"] = self.request.GET.get("status", "")
+        context["statuses"] = ContactStatusChoices.objects.all()
         return context
 
 
