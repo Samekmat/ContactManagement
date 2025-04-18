@@ -32,6 +32,7 @@ lint.ignore = [
 exclude = [
     "**/migrations/*.py",
     "**/migrations",
+    "**/settings/*.py"
 ]
 
 [build-system]
