@@ -12,7 +12,7 @@ class ContactStatusChoices(models.Model):
 class Contact(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=9, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     city = models.CharField(max_length=50)
     status = models.ForeignKey(ContactStatusChoices, on_delete=models.CASCADE)
