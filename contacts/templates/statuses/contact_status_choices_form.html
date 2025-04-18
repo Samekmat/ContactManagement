@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ view.object.pk|yesno:"Edit Status,Create Status" }}{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+  <h1 class="text-2xl font-bold mb-4">{{ view.object.pk|yesno:"Edit Status,Create Status" }}</h1>
+  <form method="post" class="space-y-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+      {{ view.object.pk|yesno:"Update,Create" }}
+    </button>
+    <a href="{% url 'contacts:status-list' %}" class="ml-2 text-gray-600 hover:underline">Cancel</a>
+  </form>
+</div>
+{% endblock %}

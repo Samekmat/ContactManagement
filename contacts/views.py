@@ -8,7 +8,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from contacts.forms import ContactForm
+from contacts.forms import ContactForm, StatusForm
 from contacts.models import Contact, ContactStatusChoices
 
 
@@ -97,3 +97,35 @@ class ContactDeleteView(DeleteView):
     model = Contact
     template_name = "contacts/contact_confirm_delete.html"
     success_url = reverse_lazy("contacts:contact-list")
+
+
+class ContactStatusListView(ListView):
+    model = ContactStatusChoices
+    template_name = "statuses/contact_status_choices_list.html"
+    context_object_name = "statuses"
+
+
+class ContactStatusDetailView(DetailView):
+    model = ContactStatusChoices
+    template_name = "statuses/contact_status_choices_detail.html"
+    context_object_name = "status"
+
+
+class ContactStatusCreateView(CreateView):
+    model = ContactStatusChoices
+    form_class = StatusForm
+    template_name = "statuses/contact_status_choices_form.html"
+    success_url = reverse_lazy("contacts:status-list")
+
+
+class ContactStatusUpdateView(UpdateView):
+    model = ContactStatusChoices
+    form_class = StatusForm
+    template_name = "statuses/contact_status_choices_form.html"
+    success_url = reverse_lazy("contacts:status-list")
+
+
+class ContactStatusDeleteView(DeleteView):
+    model = ContactStatusChoices
+    template_name = "statuses/contact_status_choices_confirm_delete.html"
+    success_url = reverse_lazy("contacts:status-list")

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Status List{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto bg-white p-6 rounded-xl shadow-md">
+  <h1 class="text-2xl font-bold mb-4">Contact Statuses</h1>
+  <a href="{% url 'contacts:status-create' %}" class="inline-block mb-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Create New Status</a>
+  <ul class="divide-y divide-gray-200">
+    {% for status in statuses %}
+      <li class="py-3 flex justify-between items-center">
+        <span class="text-gray-800">{{ status.name }}</span>
+        <div class="space-x-2">
+          <a href="{% url 'contacts:status-detail' status.pk %}" class="text-blue-600 hover:underline">View</a>
+          <a href="{% url 'contacts:status-update' status.pk %}" class="text-yellow-600 hover:underline">Edit</a>
+          <a href="{% url 'contacts:status-delete' status.pk %}" class="text-red-600 hover:underline">Delete</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="py-3 text-gray-500">No statuses available.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

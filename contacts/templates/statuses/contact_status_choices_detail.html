@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Status Detail{% endblock %}
+
+{% block content %}
+<div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+  <h1 class="text-2xl font-bold mb-4">Status: {{ status.name }}</h1>
+  <div class="mt-6 space-x-4">
+    <a href="{% url 'contacts:status-update' status.pk %}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">Edit</a>
+    <a href="{% url 'contacts:status-delete' status.pk %}" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">Delete</a>
+    <a href="{% url 'contacts:status-list' %}" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 transition">Back to List</a>
+  </div>
+</div>
+{% endblock %}
