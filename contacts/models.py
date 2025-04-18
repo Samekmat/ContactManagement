@@ -15,7 +15,7 @@ class Contact(models.Model):
     phone_number = models.CharField(max_length=9, unique=True)
     email = models.EmailField(max_length=100, unique=True)
     city = models.CharField(max_length=50)
-    status = models.ForeignKey(ContactStatusChoices, on_delete=models.CASCADE)
+    status = models.ForeignKey(ContactStatusChoices, on_delete=models.CASCADE, default="New")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self: "Contact") -> str:
