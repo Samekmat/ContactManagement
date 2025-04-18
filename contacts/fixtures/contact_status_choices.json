@@ -1,0 +1,72 @@
+[
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 1,
+    "fields": {
+      "name": "New"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 2,
+    "fields": {
+      "name": "Contacted"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 3,
+    "fields": {
+      "name": "Interested"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 4,
+    "fields": {
+      "name": "Not Interested"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 5,
+    "fields": {
+      "name": "Follow-Up"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 6,
+    "fields": {
+      "name": "Meeting Scheduled"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 7,
+    "fields": {
+      "name": "Negotiation"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 8,
+    "fields": {
+      "name": "Converted"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 9,
+    "fields": {
+      "name": "Lost"
+    }
+  },
+  {
+    "model": "contacts.contactstatuschoices",
+    "pk": 10,
+    "fields": {
+      "name": "Archived"
+    }
+  }
+]
