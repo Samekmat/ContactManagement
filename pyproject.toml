@@ -1,0 +1,35 @@
+[project]
+name = "contactmanagement"
+version = "0.1.0"
+description = "Contact Management App"
+requires-python = ">=3.13"
+dependencies = [
+    "django>=5.2",
+]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+
+[tool.ruff]
+line-length = 120
+lint.select = ["ALL"]
+lint.ignore = [
+    "D203",  # One blank line before a class docstring
+    "D212",  # Multi-line docstring should start on the first line
+    "D104",  # Missing docstring in a public package
+    "D100",  # Missing docstring in a public module
+    "D101",  # Missing docstring in a public class
+    "D104",  # Missing docstring in a public package
+    "ERA001",  # Commented-out code
+    "ANN201",  # Missing return type annotation for a public function
+    "TRY003",  # Avoid long messages in raise
+    "EM101",  # Exception string literal
+]
+
+[build-system]
+requires = ["uv"]
+build-backend = "uv.build"
