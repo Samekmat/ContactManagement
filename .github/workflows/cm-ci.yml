@@ -41,11 +41,11 @@ jobs:
           pip install pip-audit
           pip-audit
 
-#      - name: Django Security Checks
-#        run: |
-#          python manage.py check --deploy --fail-level WARNING
+      - name: Django Security Checks
+        run: |
+          python manage.py check --deploy --fail-level WARNING
 
-#      - name: Run Tests
-#        run: |
-#          python manage.py migrate
-#          python manage.py test
+      - name: Run Tests
+        run: |
+          python manage.py migrate
+          python manage.py test
