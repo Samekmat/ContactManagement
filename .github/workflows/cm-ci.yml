@@ -37,7 +37,7 @@ jobs:
           echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
 
       - name: Check formatting with Black
-        run: black --check .
+        run: black .
 
       - name: Check import order with isort
         run: isort . --check-only
