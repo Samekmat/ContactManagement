@@ -160,6 +160,34 @@ contact_management/
 </details>
 
 <details>
+<summary><strong>### Loading Sample Data with Fixtures</strong></summary>
+
+The project includes fixtures with sample data that you can load to quickly populate your database:
+
+1. Load contact status choices:
+   ```bash
+   python manage.py loaddata contacts/fixtures/contact_status_choices.json
+   ```
+
+2. Load sample contacts:
+   ```bash
+   python manage.py loaddata contacts/fixtures/contacts.json
+   ```
+
+> **Note**: The contact status choices fixture should be loaded first, as the contacts fixture depends on it.
+
+These fixtures provide:
+- 10 predefined contact statuses (New, Contacted, Interested, etc.)
+- 30 sample contacts with various statuses
+
+You can also create your own fixtures by exporting data from your database:
+```bash
+python manage.py dumpdata contacts.ContactStatusChoices --indent 2 > contacts/fixtures/my_statuses.json
+python manage.py dumpdata contacts.Contact --indent 2 > contacts/fixtures/my_contacts.json
+```
+</details>
+
+<details>
 <summary><strong>### Production Environment</strong></summary>
 
 > ⚠️ For demo or testing only. In real deployment, use Gunicorn + Nginx or similar.
