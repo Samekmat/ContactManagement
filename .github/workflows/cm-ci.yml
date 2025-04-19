@@ -45,7 +45,7 @@ jobs:
         run: ruff check .
 
       - name: Run Bandit (Security Scan)
-        run: bandit -r . -ll -iii
+        run: bandit -r contactmanagement
 
       - name: Audit dependencies with pip-audit
         run: pip-audit
