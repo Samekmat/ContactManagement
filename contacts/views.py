@@ -48,7 +48,8 @@ class ContactListView(ListView):
                 Q(first_name__icontains=query)
                 | Q(last_name__icontains=query)
                 | Q(email__icontains=query)
-                | Q(phone_number__icontains=query),
+                | Q(phone_number__icontains=query)
+                | Q(city__icontains=query),
             )
 
         if status and status.isdigit():
