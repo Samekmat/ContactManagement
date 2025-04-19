@@ -22,7 +22,7 @@ jobs:
       - name: Install uv and project dependencies
         run: |
           pip install uv
-          UV_NO_CACHE=1 uv pip install --system --extra dev
+          UV_NO_CACHE=1 uv pip install --system --extra dev --lock uv.lock
 
       - name: Set environment variables
         run: |
