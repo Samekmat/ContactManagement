@@ -12,7 +12,13 @@ class ContactStatusSerializer(serializers.ModelSerializer):
 
 
 class ContactSerializer(serializers.ModelSerializer):
-    """Get status and status_id from ContactStatusChoices."""
+    """
+    Serializer for the Contact model including related status data.
+
+    - `status` is a nested, read-only representation of the contact's status.
+    - `status_id` is a write-only field that maps to the foreign key `status`.
+      Use this to assign a status when creating or updating a contact.
+    """
 
     status = ContactStatusSerializer(read_only=True)
     status_id = serializers.PrimaryKeyRelatedField(
@@ -30,6 +36,8 @@ class ContactSerializer(serializers.ModelSerializer):
             "id",
             "first_name",
             "last_name",
+            "phone_number",
+            "email",
             "city",
             "status",
             "status_id",
