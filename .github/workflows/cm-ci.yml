@@ -41,6 +41,17 @@ jobs:
           pip install pip-audit
           pip-audit
 
-      - name: Run Tests
+      - name: Set environment variables
         run: |
-          python manage.py test
+          echo "SECRET_KEY=ci-secret-key-for-testing" >> .env
+          echo "DEBUG=False" >> .env
+          echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
+
+      - name: Run Django security checks
+        run: python manage.py check --deploy --fail-level ERROR
+
+      - name: Run migrations
+        run: python manage.py migrate
+
+      - name: Run tests
+        run: python manage.py test
