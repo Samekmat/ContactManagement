@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -12,7 +13,7 @@ from contacts.forms import ContactForm, StatusForm
 from contacts.models import Contact, ContactStatusChoices
 
 
-class ContactListView(ListView):
+class ContactListView(LoginRequiredMixin, ListView):
     """Displays a paginated list of Contact objects with optional filtering, sorting and searching."""
 
     model = Contact
@@ -74,7 +75,7 @@ class ContactListView(ListView):
         return context
 
 
-class ContactDetailView(DetailView):
+class ContactDetailView(LoginRequiredMixin, DetailView):
     """Displays detailed information about a specific contact."""
 
     model = Contact
@@ -82,7 +83,7 @@ class ContactDetailView(DetailView):
     context_object_name = "contact"
 
 
-class ContactCreateView(CreateView):
+class ContactCreateView(LoginRequiredMixin, CreateView):
     """Provides a form for creating a new contact."""
 
     model = Contact
@@ -91,7 +92,7 @@ class ContactCreateView(CreateView):
     success_url = reverse_lazy("contacts:contact-list")
 
 
-class ContactUpdateView(UpdateView):
+class ContactUpdateView(LoginRequiredMixin, UpdateView):
     """Provides a form for editing an existing contact."""
 
     model = Contact
@@ -100,7 +101,7 @@ class ContactUpdateView(UpdateView):
     success_url = reverse_lazy("contacts:contact-list")
 
 
-class ContactDeleteView(DeleteView):
+class ContactDeleteView(LoginRequiredMixin, DeleteView):
     """Asks for confirmation and deletes a selected contact."""
 
     model = Contact
@@ -108,7 +109,7 @@ class ContactDeleteView(DeleteView):
     success_url = reverse_lazy("contacts:contact-list")
 
 
-class ContactStatusListView(ListView):
+class ContactStatusListView(LoginRequiredMixin, ListView):
     """Displays a list of all contact status choices."""
 
     model = ContactStatusChoices
@@ -116,7 +117,7 @@ class ContactStatusListView(ListView):
     context_object_name = "statuses"
 
 
-class ContactStatusDetailView(DetailView):
+class ContactStatusDetailView(LoginRequiredMixin, DetailView):
     """Displays details of a specific contact status."""
 
     model = ContactStatusChoices
@@ -124,7 +125,7 @@ class ContactStatusDetailView(DetailView):
     context_object_name = "status"
 
 
-class ContactStatusCreateView(CreateView):
+class ContactStatusCreateView(LoginRequiredMixin, CreateView):
     """Provides a form for creating a new contact status."""
 
     model = ContactStatusChoices
@@ -133,7 +134,7 @@ class ContactStatusCreateView(CreateView):
     success_url = reverse_lazy("contacts:status-list")
 
 
-class ContactStatusUpdateView(UpdateView):
+class ContactStatusUpdateView(LoginRequiredMixin, UpdateView):
     """Provides a form for updating an existing contact status."""
 
     model = ContactStatusChoices
@@ -142,7 +143,7 @@ class ContactStatusUpdateView(UpdateView):
     success_url = reverse_lazy("contacts:status-list")
 
 
-class ContactStatusDeleteView(DeleteView):
+class ContactStatusDeleteView(LoginRequiredMixin, DeleteView):
     """Asks for confirmation and deletes a contact status."""
 
     model = ContactStatusChoices
