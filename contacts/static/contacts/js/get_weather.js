@@ -25,10 +25,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const temperature = weatherData.current_weather.temperature;
       const windspeed = weatherData.current_weather.windspeed;
 
-      // Humidity, for this hour
+      // Humidity for this hour, rounded down to the full hour
       const currentTime = weatherData.current_weather.time;
-      const timeIndex = weatherData.hourly.time.indexOf(currentTime);
-      const humidity = weatherData.hourly.relative_humidity_2m[timeIndex];
+      const hourOnlyTime = currentTime.slice(0, 13) + ':00';
+
+      const timeIndex = weatherData.hourly.time.findIndex(t => t === hourOnlyTime);
+      const humidity = timeIndex !== -1 ? weatherData.hourly.relative_humidity_2m[timeIndex] : "–";
 
       cell.innerHTML = `
         🌡️ ${temperature}°C<br>
