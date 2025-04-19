@@ -178,3 +178,7 @@ cython_debug/
 
 # static files:
 /staticfiles/
+
+# Node.js dependencies
+node_modules/
+contacts/tests/js/node_modules/
