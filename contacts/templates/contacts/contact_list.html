@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Contact List{% endblock %}
 
@@ -69,6 +70,8 @@
       <thead class="bg-gray-100">
         <tr>
           <th class="py-2 px-4 text-gray-600 font-semibold border-b">Name</th>
+          <th class="py-2 px-4 text-gray-600 font-semibold border-b">City</th>
+          <th class="py-2 px-4 text-gray-600 font-semibold border-b">Weather</th>
           <th class="py-2 px-4 text-gray-600 font-semibold border-b">Actions</th>
         </tr>
       </thead>
@@ -79,6 +82,10 @@
               <a href="{% url 'contacts:contact-detail' contact.pk %}" class="text-blue-600 hover:underline">
                 {{ contact.first_name }} {{ contact.last_name }}
               </a>
+            </td>
+            <td class="py-2 px-4 border-b">{{ contact.city }}</td>
+            <td class="py-2 px-4 border-b weather-data" data-city="{{ contact.city|urlencode }}">
+              <span class="text-gray-400 italic">Loading...</span>
             </td>
             <td class="py-2 px-4 border-b">
               <a href="{% url 'contacts:contact-update' contact.pk %}" class="text-sky-500 hover:underline">Edit</a> |
@@ -117,4 +124,6 @@
     </div>
   {% endif %}
 </div>
+
+    <script src="{% static 'contacts/js/get_weather.js' %}"></script>
 {% endblock %}

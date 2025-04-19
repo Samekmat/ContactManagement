@@ -18,7 +18,7 @@ class ContactListView(ListView):
     model = Contact
     template_name = "contacts/contact_list.html"
     context_object_name = "contacts"
-    paginate_by = 10
+    paginate_by = 5
 
     def get_ordering(self: "ContactListView") -> str:
         """
