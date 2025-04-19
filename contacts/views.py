@@ -75,12 +75,16 @@ class ContactListView(ListView):
 
 
 class ContactDetailView(DetailView):
+    """Displays detailed information about a specific contact."""
+
     model = Contact
     template_name = "contacts/contact_detail.html"
     context_object_name = "contact"
 
 
 class ContactCreateView(CreateView):
+    """Provides a form for creating a new contact."""
+
     model = Contact
     form_class = ContactForm
     template_name = "contacts/contact_form.html"
@@ -88,6 +92,8 @@ class ContactCreateView(CreateView):
 
 
 class ContactUpdateView(UpdateView):
+    """Provides a form for editing an existing contact."""
+
     model = Contact
     form_class = ContactForm
     template_name = "contacts/contact_form.html"
@@ -95,24 +101,32 @@ class ContactUpdateView(UpdateView):
 
 
 class ContactDeleteView(DeleteView):
+    """Asks for confirmation and deletes a selected contact."""
+
     model = Contact
     template_name = "contacts/contact_confirm_delete.html"
     success_url = reverse_lazy("contacts:contact-list")
 
 
 class ContactStatusListView(ListView):
+    """Displays a list of all contact status choices."""
+
     model = ContactStatusChoices
     template_name = "statuses/contact_status_choices_list.html"
     context_object_name = "statuses"
 
 
 class ContactStatusDetailView(DetailView):
+    """Displays details of a specific contact status."""
+
     model = ContactStatusChoices
     template_name = "statuses/contact_status_choices_detail.html"
     context_object_name = "status"
 
 
 class ContactStatusCreateView(CreateView):
+    """Provides a form for creating a new contact status."""
+
     model = ContactStatusChoices
     form_class = StatusForm
     template_name = "statuses/contact_status_choices_form.html"
@@ -120,6 +134,8 @@ class ContactStatusCreateView(CreateView):
 
 
 class ContactStatusUpdateView(UpdateView):
+    """Provides a form for updating an existing contact status."""
+
     model = ContactStatusChoices
     form_class = StatusForm
     template_name = "statuses/contact_status_choices_form.html"
@@ -127,6 +143,8 @@ class ContactStatusUpdateView(UpdateView):
 
 
 class ContactStatusDeleteView(DeleteView):
+    """Asks for confirmation and deletes a contact status."""
+
     model = ContactStatusChoices
     template_name = "statuses/contact_status_choices_confirm_delete.html"
     success_url = reverse_lazy("contacts:status-list")

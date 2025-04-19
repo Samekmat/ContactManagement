@@ -10,6 +10,13 @@ from .forms import RegistrationForm
 
 
 class RegisterView(CreateView):
+    """
+    View responsible for user registration.
+
+    Uses a custom registration form and logs the user in immediately after
+    successful registration, redirecting to the contact list view.
+    """
+
     model = User
     form_class = RegistrationForm
     template_name = "registration/register.html"
@@ -17,6 +24,6 @@ class RegisterView(CreateView):
 
     def form_valid(self: "RegisterView", form: Form) -> HttpResponse:
         """Handle the form submission and log the user in after registration."""
-        response = super().form_valid(form)
+        super().form_valid(form)
         login(self.request, self.object)
-        return redirect("contact-list", response=response)
+        return redirect("contact-list")
