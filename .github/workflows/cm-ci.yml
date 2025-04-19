@@ -19,10 +19,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install uv and project dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install black isort ruff bandit safety django django-environ
+          pip install uv
+          UV_NO_CACHE=1 uv pip install --system --extra dev
+
+      - name: Set environment variables
+        run: |
+          echo "SECRET_KEY=ci-secret-key-for-testing" >> .env
+          echo "DEBUG=False" >> .env
+          echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
 
       - name: Check formatting with Black
         run: black --check .
@@ -37,15 +43,7 @@ jobs:
         run: bandit -r . -ll -iii
 
       - name: Audit dependencies with pip-audit
-        run: |
-          pip install pip-audit
-          pip-audit
-
-      - name: Set environment variables
-        run: |
-          echo "SECRET_KEY=ci-secret-key-for-testing" >> .env
-          echo "DEBUG=False" >> .env
-          echo "ALLOWED_HOSTS=127.0.0.1,localhost" >> .env
+        run: pip-audit
 
       - name: Run Django security checks
         run: python manage.py check --deploy --fail-level ERROR
